@@ -11,10 +11,9 @@
 ### Install docker in Windows
 
 * Description: It's simple, go ahead and install docker desktop in Windows.
-* Repository: [https://github.com/aritraibm/service-registry.git](https://github.com/aritraibm/service-registry.git)
-* Repository: ```NA```
-<img width="959" alt="docker-desktop" src="https://user-images.githubusercontent.com/103875790/175329201-0654608f-0dd9-40d5-9095-b7fc0948a6c0.PNG">
+* Url: https://docs.docker.com/desktop/windows/install/
 
+<img width="959" alt="docker-desktop" src="https://user-images.githubusercontent.com/103875790/175329201-0654608f-0dd9-40d5-9095-b7fc0948a6c0.PNG">
 
 
 ### Generate jar file of springboot application
@@ -22,7 +21,7 @@
 * Description: We should have the ability to generate jar file of our spring boot application.
 * pom.xml: 
   ```
-  <build>
+  	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -87,7 +86,7 @@ rest-demo           latest    9e6afad6f392   22 hours ago     544MB
 It'll return all the availble containers on that system.
 ```
 CONTAINER ID   IMAGE               COMMAND                  CREATED         STATUS                  PORTS                    NAMES
-494700fb3243   docker-sample-api   "java -jar /docker-s…"   2 minutes ago   Up 2 minutes (Paused)   0.0.0.0:8090->8090/tcp   nostalgic_chebyshev
+494700fb3243   docker-sample-api   "java -jar /docker-s…"   2 minutes ago   Up 2 minutes	   0.0.0.0:8090->8090/tcp   nostalgic_chebyshev
 ```
 
 ### Pause any docker container
@@ -107,7 +106,7 @@ CONTAINER ID   IMAGE               COMMAND                  CREATED         STAT
 * Command: ```docker stop 494700fb3243```
 
 
-## Push an image to docker hub
+## Push an image to docker hub (https://hub.docker.com/)
 
 ### Steps/notes to push any docker image to docker hub
 ```
