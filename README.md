@@ -1,7 +1,7 @@
 # Docker Implementation Document
 
 
-## Docker Implementation Document
+## Docker Implementation Guidelines
 
 ### Create a sample springboot rest api
 
@@ -74,128 +74,75 @@ docker-sample-api   latest    4cefdb8ee5f0   13 minutes ago   544MB
 rest-demo           latest    9e6afad6f392   22 hours ago     544MB
 ```
 
-### Create docker image from springboot application
+### Run/execute docker image
 
-* Description: Use below command to generate docker image.
-* Command: ```docker build . -t docker-sample-api```
-
-
-### Create docker image from springboot application
-
-* Description: Use below command to generate docker image.
-* Command: ```docker build . -t docker-sample-api```
+* Description: Use below command to run docker image.
+* Command: ```docker run -p 8090:8090 docker-sample-api```
 
 
-### Create docker image from springboot application
+### View docker containers
 
-* Description: Use below command to generate docker image.
-* Command: ```docker build . -t docker-sample-api```
-
-
-### Create docker image from springboot application
-
-* Description: Use below command to generate docker image.
-* Command: ```docker build . -t docker-sample-api```
-
-
-## Distributed Logging Implementation
-
-### ELK Stack (with Sleuth)
-
-* Description: To implement distributed logging, we can use Logstash, Elastic Search, and Kibana. Sleuth will help us to generate and maintain a global trace or correlation id for all the required applications. Logstash will collect the logs from the application and provide them into elastic search and Kibana helps us to visualize (as it provides us an interactive UI to view) the logs.
-Here, we used ELK with the 7.6.2 version as it’s compatible with jdk8, however, we can use any of the updated versions with updated JDK. Sleuth dependency is available in user service pom.xml and below are the download link for all of the ELK applications.
-
-* ElasticSearch: https://www.elastic.co/downloads/elasticsearch
-
-* Logstash: https://www.elastic.co/downloads/logstash
-
-* Kibana: https://www.elastic.co/downloads/kibana
-
-
-### Zipkin & Rabbit (with Sleuth)
-
-* Description: Zipkin is also a very good way to maintain/ view the distributed logs. Here also, Sleuth will help us to generate and maintain a global trace or correlation id for all the required applications. It’s recommended to integrate Zipkin with rabbit (MQ) to avoid single failure scenarios.
-
-
-## Functionalities & Endpoints
-
-### Save Department Details
-
-* Description: This API will save new department details.
-* URL: ```http://localhost:9191/pru-dept/save-dept```
-* HTTP method: ```POST```
-* Body: 
+* Description: Use below command to view all available docker container.
+* Command: ```docker ps```
+It'll return all the availble containers on that system.
 ```
-{
-    "deptName": "IT",
-    "deptAddress": "India",
-    "deptCode": "D-001"
-}
+CONTAINER ID   IMAGE               COMMAND                  CREATED         STATUS                  PORTS                    NAMES
+494700fb3243   docker-sample-api   "java -jar /docker-s…"   2 minutes ago   Up 2 minutes (Paused)   0.0.0.0:8090->8090/tcp   nostalgic_chebyshev
 ```
 
+### Pause any docker container
 
-### Get Department Details by Department Id
+* Description: Use below command to pause docker container.
+* Command: ```docker pause 494700fb3243```
 
-* Description: This API will get existing department details by department Id.
-* URL: ```http://localhost:9191/pru-dept/get-dept/4```
-* HTTP method: ```GET```
-* Body: 
+
+### Resume/unpause any docker container
+
+* Description: Use below command to resume/unpause docker container.
+* Command: ```docker unpause 494700fb3243```
+
+### Stop any docker container
+
+* Description: Use below command to stop docker container.
+* Command: ```docker stop 494700fb3243```
+
+
+## Push an image to docker hub
+
+### Steps/notes to push any docker image to docker hub
 ```
-NA
+docker logout                                   # to make sure you're logged out and not cause any clashes
+docker tag <imageId> myusername/docker-whale    # use :1.0.0 for specific version, default is 'latest'
+docker login --username=myusername              # use the username/pwd to login to docker hub
+docker push myusername/docker-whale             # use :1.0.0 for pushing specific version, default is 'latest'
 ```
-
-
-
-### Save User Details
-
-* Description: This API will save new user details.
-* URL: ```http://localhost:9191/pru-user/save-user```
-* HTTP method: ```POST```
-* Body: 
+based on our example, the commands should be:
 ```
-{
-    "firstName": "Alex",
-    "lastName": "Nichols",
-    "email": "alex@test.com",
-    "deptId": 4
-}
+docker logout                                   
+docker tag docker-sample-api aritradb/docker-sample-api 
+docker login --username=aritradb       
+docker push aritradb/docker-sample-api
 ```
-
-
-
-### Get User Details by User Id (JPA method)
-
-* Description: This API will get existing user details by user Id.
-* URL: ```http://localhost:9191/pru-user/get-user/5```
-* HTTP method: ```GET```
-* Body: 
+after pushing the return should be like:
 ```
-NA
-```
-
-
-
-### Get User Details by User Id (Named Native - SQL)
-
-* Description: This API will get existing user details by user Id.
-* URL: ```http://localhost:9191/pru-user/get-user-by-named-native/5```
-* HTTP method: ```GET```
-* Body: 
-```
-NA
+Using default tag: latest
+The push refers to repository [docker.io/aritradb/docker-sample-api]
+0ea37e415702: Pushed
+89f3c2569d89: Pushed
+cc63c81d3b06: Pushed
+369123a7ed65: Pushed
+5afd661c6106: Pushed
+66183893ba24: Pushed
+6840c8ff46bd: Pushed
+97d5fec864d8: Pushed
+latest: digest: sha256:9848e35f1185c9bfa1dad06e1f8852fcb82b50077823aa1665960d3f8063c75d size: 2007
 ```
 
+### Steps/notes to pull any docker image from docker hub
 
+* Pull: ```docker pull aritradb/docker-sample-api:latest```
 
-### Get User Details by User Id (Named - JPQL)
-
-* Description: This API will get existing user details by user Id.
-* URL: ```http://localhost:9191/pru-user/get-user-by-named/5```
-* HTTP method: ```GET```
-* Body: 
-```
-NA
-```
+* Run: ```docker run -p 8090:8090 aritradb/docker-sample-api```
 
 
 ## Version History
