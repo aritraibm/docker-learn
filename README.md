@@ -109,7 +109,7 @@ CONTAINER ID   IMAGE               COMMAND                  CREATED         STAT
 * Command: ```docker stop 494700fb3243```
 
 
-### 12. Remove any docker container
+### 12. Remove any docker image
 
 * Description: Use below command to remove docker image (please stop the container if it's already running). Add ```rm``` for removal.
 * Command: ```docker image rm 494700fb3243```
