@@ -76,8 +76,9 @@ rest-demo           latest    9e6afad6f392   22 hours ago     544MB
 
 ### 8. Run/execute docker image
 
-* Description: Use the below command to run the docker image. So it'll run the springboot application as a docker container and will be available in port 8090.
-* Command: ```docker run -p 8090:8090 docker-sample-api```
+* Description: Use the below command to run the docker image. So it'll run the springboot application as a docker container and will be available in port 8090. We can use image name or image id.
+* Command (image name): ```docker run -p 8090:8090 docker-sample-api```
+* Command (image id): ```docker run -p 8090:8090 4cefdb8ee5f0```
 
 
 ### 9. View docker containers
@@ -106,6 +107,12 @@ CONTAINER ID   IMAGE               COMMAND                  CREATED         STAT
 
 * Description: Use below command to stop docker container.
 * Command: ```docker stop 494700fb3243```
+
+
+### 12. Remove any docker container
+
+* Description: Use below command to remove docker image (please stop the container if it's already running). Add ```rm``` for removal.
+* Command: ```docker image rm 494700fb3243```
 
 
 ### 13. Push an image to docker hub (https://hub.docker.com/)
@@ -141,7 +148,8 @@ latest: digest: sha256:9848e35f1185c9bfa1dad06e1f8852fcb82b50077823aa1665960d3f8
 
 ### 14. Steps/notes to pull any docker image from docker hub
 
-* Pull: ```docker pull aritradb/docker-sample-api:latest```
+* Pull (by default): ```docker pull aritradb/docker-sample-api:latest```
+* Pull (by tag name): ```docker pull aritradb/docker-sample-api:0.0.1-SNAPSHOT```
 
 * Run: ```docker run -p 8090:8090 aritradb/docker-sample-api```
 
