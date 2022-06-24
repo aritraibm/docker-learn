@@ -1,11 +1,11 @@
 # Docker Implementation Document
 
 
-## Docker Implementation Guidelines
+## Docker Implementation Guidelines using Dockerfile
 
-### Create a sample springboot rest api
+### Create a sample springboot rest API
 
-* Description: First we'll be creating a sample rest api which will reurn simple text as return while invoking simple GET api.
+* Description: First we'll be creating a sample rest API which will reurn a simple text while invoking a simple GET API.
 
 
 ### Install docker in Windows
@@ -18,7 +18,7 @@
 
 ### Generate jar file of springboot application
 
-* Description: We should have the ability to generate jar file of our spring boot application.
+* Description: We should have the ability to generate a jar file of our spring boot application.
 * pom.xml: 
   ```
   	<build>
@@ -34,14 +34,14 @@
 * Steps to generate: 
   1. maven clean
   2. maven install
-  Jar will be generated based on the ```<finalName>``` tag mentioned above. Go to target folder and we'll see our jar file (docker-sample-api.jar).
+  the jar will be generated based on the ```<finalName>``` tag mentioned above. Go to the target folder and we'll see our jar file (docker-sample-api.jar).
 * Screenshot:
 <img width="235" alt="maven-jar-name" src="https://user-images.githubusercontent.com/103875790/175330684-eb4b45fa-6f0b-43e1-b229-52383ec400f3.PNG">
 
 
 ### Create Dockerfile
 
-* Description: To generate dockerimage from the springboot application, we need to configure ```Dockerfile```, in the root create a file named ```Dockerfile``` and use below on Dockerfile:
+* Description: To generate docker image from the springboot application, we need to configure ```Dockerfile```, in the root create a file named ```Dockerfile``` and use below on Dockerfile:
 ```
 FROM openjdk:8
 EXPOSE 8090
@@ -51,21 +51,21 @@ ENTRYPOINT [ "java", "-jar", "/docker-sample-api.jar" ]
 It's saying we need to add openjdk version 8, expose the port as ```8090``` and mention the jar in ADD and entrypoint
 
 
-### Make sure the docker is availble and running
+### Make sure the docker is available and running
 
-* Description: use below command in cmd to know whether the docker is installed in your windows machine or not.
+* Description: use the below command in cmd to know whether the docker is installed in your windows machine or not.
 * Command: ```docker -v``` it'll return something like ```Docker version 20.10.16, build aa7e414``` as a command response
 
 
 ### Create docker image from springboot application
 
-* Description: Use below command to generate docker image.
+* Description: Use the below command to generate a docker image.
 * Command: ```docker build . -t docker-sample-api```
 
 
 ### View the docker image
 
-* Description: Use below command to view all the docker images in your local system (be carefull those are not available in docker hub till now, only present in local machine).
+* Description: Use the below command to view all the docker images in your local system (be careful those are not available in docker hub till now, only present on the local machine).
 * Command: ```docker images```
 ```
 REPOSITORY          TAG       IMAGE ID       CREATED          SIZE
@@ -75,15 +75,15 @@ rest-demo           latest    9e6afad6f392   22 hours ago     544MB
 
 ### Run/execute docker image
 
-* Description: Use below command to run docker image.
+* Description: Use the below command to run the docker image.
 * Command: ```docker run -p 8090:8090 docker-sample-api```
 
 
 ### View docker containers
 
-* Description: Use below command to view all available docker container.
+* Description: Use the below command to view all available docker containers.
 * Command: ```docker ps```
-It'll return all the availble containers on that system.
+It'll return all the available containers on that system.
 ```
 CONTAINER ID   IMAGE               COMMAND                  CREATED         STATUS                  PORTS                    NAMES
 494700fb3243   docker-sample-api   "java -jar /docker-s…"   2 minutes ago   Up 2 minutes	   0.0.0.0:8090->8090/tcp   nostalgic_chebyshev
@@ -91,13 +91,13 @@ CONTAINER ID   IMAGE               COMMAND                  CREATED         STAT
 
 ### Pause any docker container
 
-* Description: Use below command to pause docker container.
+* Description: Use the below command to pause the docker container.
 * Command: ```docker pause 494700fb3243```
 
 
 ### Resume/unpause any docker container
 
-* Description: Use below command to resume/unpause docker container.
+* Description: Use the below command to resume/unpause the docker container.
 * Command: ```docker unpause 494700fb3243```
 
 ### Stop any docker container
@@ -108,7 +108,7 @@ CONTAINER ID   IMAGE               COMMAND                  CREATED         STAT
 
 ## Push an image to docker hub (https://hub.docker.com/)
 
-### Steps/notes to push any docker image to docker hub
+### Steps/notes to push any docker image to the docker hub
 ```
 docker logout                                   # to make sure you're logged out and not cause any clashes
 docker tag <imageId> myusername/docker-whale    # use :1.0.0 for specific version, default is 'latest'
@@ -122,7 +122,7 @@ docker tag docker-sample-api aritradb/docker-sample-api
 docker login --username=aritradb       
 docker push aritradb/docker-sample-api
 ```
-after pushing the return should be like:
+after pushing the return should be like this:
 ```
 Using default tag: latest
 The push refers to repository [docker.io/aritradb/docker-sample-api]
@@ -142,6 +142,11 @@ latest: digest: sha256:9848e35f1185c9bfa1dad06e1f8852fcb82b50077823aa1665960d3f8
 * Pull: ```docker pull aritradb/docker-sample-api:latest```
 
 * Run: ```docker run -p 8090:8090 aritradb/docker-sample-api```
+
+
+
+
+
 
 
 ## Version History
