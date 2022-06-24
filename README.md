@@ -108,7 +108,6 @@ CONTAINER ID   IMAGE               COMMAND                  CREATED         STAT
 * Command: ```docker stop 494700fb3243```
 
 
-
 ### 13. Push an image to docker hub (https://hub.docker.com/)
 
 **Steps/notes to push any docker image to the docker hub**
@@ -149,6 +148,11 @@ latest: digest: sha256:9848e35f1185c9bfa1dad06e1f8852fcb82b50077823aa1665960d3f8
 
 
 
+## Docker Implementation Guidelines using maven plugin (option-2)
+
+### 1. Create a sample springboot rest API
+
+* Description: First we'll be creating a sample rest API (in springboot, code is available in this repo) which will reurn a simple text while invoking a simple GET API.
 
 
 
