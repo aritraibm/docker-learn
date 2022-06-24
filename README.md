@@ -5,7 +5,7 @@
 
 ### 1. Create a sample springboot rest API
 
-* Description: First we'll be creating a sample rest API (in springboot, code is available in this repo) which will reurn a simple text while invoking a simple GET API.
+* Description: First we'll be creating a sample rest API (in springboot, code is available in this repo ```without-maven-plugin```) which will reurn a simple text while invoking a simple GET API.
 
 
 ### 2. Install docker in Windows
