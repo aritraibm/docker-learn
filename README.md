@@ -241,7 +241,7 @@ Go to docker hub to view the newly uploaded image. From there we can pull the im
 <img width="784" alt="docker-hub-2" src="https://user-images.githubusercontent.com/103875790/175482375-2b73708e-336e-443b-9d91-65e257ca1e31.PNG">
 
 
-### 2. Follow the same steps (from step 4) in the above section
+### 2. Follow the same steps (from step 4 to step 14) in the above section
 
 
 
