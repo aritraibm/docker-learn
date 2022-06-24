@@ -158,9 +158,91 @@ latest: digest: sha256:9848e35f1185c9bfa1dad06e1f8852fcb82b50077823aa1665960d3f8
 
 ## Docker Implementation Guidelines using maven plugin (option-2)
 
-### 1. Create a sample springboot rest API
+### Follow Step 1 and 2 from above.
 
-* Description: First we'll be creating a sample rest API (in springboot, code is available in this repo) which will reurn a simple text while invoking a simple GET API.
+### 1. Generate jar file, generate docker image and push it to docker hub from springboot application
+
+* Description: We should have the ability to generate a jar file, generate docker image and pudh it to docker hub from our spring boot application. Go to pom.xml and modify the ```<build>``` tag as below (here we'll be using diferent springboot project, hence name will be diferent).
+* pom.xml: 
+  ```
+  	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>io.openliberty.boost</groupId>
+				<artifactId>boost-maven-plugin</artifactId>
+				<version>0.1</version>
+				<executions>
+					<execution>
+						<id>default</id>
+						<phase>install</phase>
+						<goals>
+							<goal>docker-build</goal>
+							<goal>docker-push</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<repository>aritradb/${project.artifactId}</repository>
+					<tag>${project.version}</tag>
+					<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+					<buildArgs>
+						<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+					</buildArgs>
+				</configuration>
+			</plugin>
+		</plugins>
+		<finalName>rest-demo</finalName>
+	</build>
+  ```
+
+* Explanation: Here, instead of using manual steps (like above), we are using the maven plugin to do the same job. Create jar, image, and push into docker hub.
+ 
+```
+	<executions>
+		<execution>
+			<id>default</id>
+			<phase>install</phase>
+			<goals>
+				<goal>docker-build</goal>
+				<goal>docker-push</goal>
+			</goals>
+		</execution>
+	</executions>
+```
+The above section is responsible to set the goal to build the docker image and push. 
+```
+	<configuration>
+		<repository>aritradb/${project.artifactId}</repository>
+		<tag>${project.version}</tag>
+		<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+		<buildArgs>
+			<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+		</buildArgs>
+	</configuration>
+```
+Above configuration describes our repository details along with tag name and uses the jar file name as build args.
+
+* Steps to generate: 
+  1. maven clean
+  2. maven install
+  
+* Screenshot:
+<img width="598" alt="execution runing" src="https://user-images.githubusercontent.com/103875790/175480008-db745f9e-762e-49a7-a8e1-4d938efd709a.PNG">
+
+Go to docker hub to view the newly uploaded image. From there we can pull the image and run it as a container.
+
+<img width="789" alt="docker-hub-1" src="https://user-images.githubusercontent.com/103875790/175483091-3b70bc30-9710-407c-bd95-e46041ab78f3.PNG">
+
+
+<img width="784" alt="docker-hub-2" src="https://user-images.githubusercontent.com/103875790/175482375-2b73708e-336e-443b-9d91-65e257ca1e31.PNG">
+
+
+### 2. Follow the same steps (from step 4) in the above section
+
 
 
 
