@@ -188,7 +188,6 @@ latest: digest: sha256:9848e35f1185c9bfa1dad06e1f8852fcb82b50077823aa1665960d3f8
 				<configuration>
 					<repository>aritradb/${project.artifactId}</repository>
 					<tag>${project.version}</tag>
-					<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
 					<buildArgs>
 						<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
 					</buildArgs>
@@ -218,7 +217,6 @@ The above section is responsible to set the goal to build the docker image and p
 	<configuration>
 		<repository>aritradb/${project.artifactId}</repository>
 		<tag>${project.version}</tag>
-		<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
 		<buildArgs>
 			<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
 		</buildArgs>
@@ -239,6 +237,17 @@ Go to docker hub to view the newly uploaded image. From there we can pull the im
 
 
 <img width="784" alt="docker-hub-2" src="https://user-images.githubusercontent.com/103875790/175482375-2b73708e-336e-443b-9d91-65e257ca1e31.PNG">
+
+For future code changes and all, just need to update the project version number and follow the same steps which will update the docker hub with an updated tag, see the screenshot:
+
+```
+	<artifactId>rest-demo</artifactId>
+	<version>0.0.2-SNAPSHOT</version> <!-- previously it was 0.0.1-SNAPSHOT -->
+	<name>rest-demo</name>
+```
+
+<img width="779" alt="docker-hub-3" src="https://user-images.githubusercontent.com/103875790/175486341-6a86abe1-abb7-4cc3-a9cc-3ead9cbd896f.PNG">
+
 
 
 ### 2. Follow the same steps (from step 4 to step 14) in the above section
